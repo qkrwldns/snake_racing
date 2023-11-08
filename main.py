@@ -24,21 +24,25 @@ window.onkey(snake.right,"Right")
 game = True
 while game:
     window.update()
-    time.sleep(0.05)
+    time.sleep(0.08)
     snake.move()
 
     if snake.head.distance(food) < 15:
         food.reset_food()
         score.update_score()  # Call the updated method
         snake.extend()
+        score.plus_score()
     # wall
     if snake.head.xcor() >= 290 or snake.head.xcor() <= -290 or snake.head.ycor() >= 290 or snake.head.ycor() <= -290:
-        game = False
-        score.know_game_over()
-
+        score.reset()
+        snake.reset()
     # tail
     for i in snake.segments[1:]:
-        if snake.head.distance(i) < 10:
-            game = False
-            score.know_game_over()
+        if i == snake.head:
+            pass
+        elif snake.head.distance(i) < 10:
+            score.reset()
+            snake.reset()
+
+
 window.exitonclick()

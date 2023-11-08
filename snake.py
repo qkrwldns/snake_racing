@@ -25,6 +25,13 @@ class Snake:
             new.goto(i)
             self.segments.append(new)
 
+    def reset(self):
+        for seg in self.segments:
+            seg.hideturtle()   # 삭제가 아니라 화면 밖으로 이동,,?
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
     def extend(self):
         new = Turtle()
         pos_x = self.segments[len(self.segments)-1].xcor()
